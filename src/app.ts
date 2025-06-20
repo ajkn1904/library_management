@@ -24,7 +24,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
     message: error.message,
     error,
   };
-
   if (error instanceof mongoose.Error.ValidationError) {
     statusCode = 400;
     errorResponse.message = "Validation failed";
