@@ -27,5 +27,6 @@ app.use((error, req, res, next) => {
         errorResponse.message = "Validation failed";
     }
     res.status(statusCode).json(errorResponse);
+    next();
 });
 exports.default = app;
