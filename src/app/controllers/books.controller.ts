@@ -76,6 +76,12 @@ booksRoutes.put(
       const id = req.params.bookId;
       const newBody = req.body;
       const data = await Book.findByIdAndUpdate(id, newBody, { new: true });
+      
+      if(data && newBody.copies > 0){
+            data.available = true;
+            await data?.save()
+        }
+
 
       res.status(201).json({
         success: true,
