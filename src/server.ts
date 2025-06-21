@@ -1,6 +1,7 @@
 import { Server } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
+require('dotenv').config();
 
 let server: Server;
 
@@ -8,7 +9,7 @@ const PORT = 5000;
 
 async function main() {
     try {
-        await mongoose.connect('mongodb+srv://mongodb:RgvJ5zxYNLfmGE01@cluster0.ah4tzpk.mongodb.net/libraryManagementDB?retryWrites=true&w=majority&appName=Cluster0');
+        await mongoose.connect(`${process.env.DATABASE_URL}`);
 
         console.log("Connected to MongoDB Using Mongoose!!");
         server = app.listen(PORT, () => {

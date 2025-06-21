@@ -14,12 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
+require('dotenv').config();
 let server;
 const PORT = 5000;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect('mongodb+srv://mongodb:RgvJ5zxYNLfmGE01@cluster0.ah4tzpk.mongodb.net/libraryManagementDB?retryWrites=true&w=majority&appName=Cluster0');
+            yield mongoose_1.default.connect(`${process.env.DATABASE_URL}`);
             console.log("Connected to MongoDB Using Mongoose!!");
             server = app_1.default.listen(PORT, () => {
                 console.log(`App is listening on port ${PORT}`);
