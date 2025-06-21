@@ -27,7 +27,16 @@ booksRoutes.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await Book.find();
+      let data = [];
+      const {filter, sortBy = "createdAt", sort = "desc", limit = 10} = req.query;
+
+      if (filter) {
+        data = await Book.find({genre: { $regex: `^${filter}$`, $options: "i" }}).sort({ [sortBy as string]: sort === "asc" ? 1 : -1 }).limit(Math.max(1, parseInt(limit as string) || 10));
+      } else {
+        data = await Book.find();
+      }
+
+      
 
       res.status(201).json({
         success: true,
@@ -59,7 +68,6 @@ booksRoutes.get(
   }
 );
 
-
 // Update Book
 booksRoutes.put(
   "/:bookId",
@@ -80,14 +88,13 @@ booksRoutes.put(
   }
 );
 
-
 // Delete Book
 booksRoutes.delete(
   "/:bookId",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = req.params.bookId;
-      const data = await Book.deleteOne({_id: id});
+      const data = await Book.deleteOne({ _id: id });
 
       res.status(201).json({
         success: true,
