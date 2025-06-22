@@ -14,6 +14,10 @@ app.use("/api/borrow", borrow_controller_1.borrowRoutes);
 app.get("/", (req, res) => {
     res.send("Welcome to Library Management App!");
 });
+//error 404 handler
+app.use((req, res, next) => {
+    res.status(404).json({ message: "Route not found" });
+});
 //Global error handler --> Generic Error Response
 app.use((error, req, res, next) => {
     let statusCode = 500;

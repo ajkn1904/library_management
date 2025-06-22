@@ -15,6 +15,11 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 
+//error 404 handler
+app.use((req : Request, res : Response, next: NextFunction) => {
+  res.status(404).json({message: "Route not found"})
+})
+
 
 //Global error handler --> Generic Error Response
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

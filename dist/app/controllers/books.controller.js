@@ -59,7 +59,7 @@ exports.booksRoutes.get("/:bookId", (req, res, next) => __awaiter(void 0, void 0
         const data = yield books_model_1.Book.findById(id);
         res.status(201).json({
             success: true,
-            message: "Books retrieved successfully",
+            message: "Book retrieved successfully",
             data,
         });
     }
