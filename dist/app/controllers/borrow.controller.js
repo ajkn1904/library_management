@@ -38,7 +38,7 @@ exports.borrowRoutes.post('/', (req, res, next) => __awaiter(void 0, void 0, voi
         }
         if (book === null || book === void 0 ? void 0 : book.available) {
             book.copies = (book === null || book === void 0 ? void 0 : book.copies) - quantity;
-            book === null || book === void 0 ? void 0 : book.updateAvailability();
+            //book?.updateAvailability();
             yield (book === null || book === void 0 ? void 0 : book.save());
             const data = yield borrow_model_1.Borrow.create({ book: book === null || book === void 0 ? void 0 : book._id, quantity, dueDate });
             res.status(201).json({

@@ -13,6 +13,7 @@ borrowRoutes.post('/', async(req: Request, res: Response, next: NextFunction) =>
 
         const book = await Book.findById(bookId);
         
+        
         if (!book) {
             res.status(404).json({
             success: false,
@@ -29,7 +30,7 @@ borrowRoutes.post('/', async(req: Request, res: Response, next: NextFunction) =>
 
         if(book?.available){
             book.copies = book?.copies - quantity;
-            book?.updateAvailability();
+            //book?.updateAvailability();
             await book?.save()
 
             const data = await Borrow.create({book: book?._id, quantity, dueDate})

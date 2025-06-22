@@ -73,9 +73,10 @@ exports.booksRoutes.put("/:bookId", (req, res, next) => __awaiter(void 0, void 0
         const id = req.params.bookId;
         const newBody = req.body;
         const data = yield books_model_1.Book.findByIdAndUpdate(id, newBody, { new: true });
-        if (data && newBody.copies > 0) {
-            data.available = true;
-            yield (data === null || data === void 0 ? void 0 : data.save());
+        if (data && typeof newBody.copies === "number") {
+            //data.available = true;    
+            data.copies = newBody.copies;
+            yield data.save();
         }
         res.status(201).json({
             success: true,

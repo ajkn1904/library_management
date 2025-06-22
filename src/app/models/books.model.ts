@@ -52,4 +52,19 @@ bookSchema.methods.updateAvailability = function () {
     this.available = this.copies > 0;
 }
 
+
+//'pre' hook : its doing the updateAvailability()'s task automatically
+bookSchema.pre("save", function (next) {
+  this.available = this.copies > 0; 
+  console.log(`Book "${this.title}", pre-save hook: availability set to ${this.available}`);
+  next();
+});
+
+// 'post' hook
+bookSchema.post("save", function (doc) {
+  console.log(`Book "${doc.title}", post-save hook: left ${doc.copies} copies available`);
+});
+
+
+
 export const Book = model<IBooks>("Book", bookSchema);
