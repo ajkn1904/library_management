@@ -27,6 +27,7 @@ The project includes:
 - `npm i ts-node-dev -D --save-dev`
 - `npm i -D nodemon`
 - `npm install dotenv`
+- `npm i --save-dev @types/cors`
 
 ### At `tsconfig.json` :----------
 ```json

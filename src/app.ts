@@ -2,10 +2,17 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import { booksRoutes } from "./app/controllers/books.controller";
 import { borrowRoutes } from "./app/controllers/borrow.controller";
 import mongoose from "mongoose";
+import cors from 'cors';
+
 
 const app: Application = express();
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://library-management-iota-sage.vercel.app/']
+   })
+);
 
 app.use("/api/books", booksRoutes);
 app.use("/api/borrow", borrowRoutes);
