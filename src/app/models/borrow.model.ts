@@ -18,7 +18,7 @@ const borrowSchema = new Schema<IBorrow>(
       },
     },
     dueDate: {
-      type: Date,
+      type: String,
       required: [true, 'Due date is required'],
     },
   },
